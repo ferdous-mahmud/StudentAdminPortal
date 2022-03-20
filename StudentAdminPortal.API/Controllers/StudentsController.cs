@@ -34,7 +34,7 @@ namespace StudentAdminPortal.API.Controllers
                     Email = student.Email,
                     Mobile = student.Mobile,
                     ProfileImageUrl = student.ProfileImageUrl,
-                    Gender = student.Gender
+                    GenderId = student.GenderId
                 });
             }
 
