@@ -16,7 +16,7 @@ namespace StudentAdminPortal.API.Controllers
         }
 
         [HttpGet]
-        [Route("Controller")]
+        [Route("Students")]
         public IActionResult GetAllStudent()
         {
             var students = studentRepository.GetStudents();
@@ -34,7 +34,18 @@ namespace StudentAdminPortal.API.Controllers
                     Email = student.Email,
                     Mobile = student.Mobile,
                     ProfileImageUrl = student.ProfileImageUrl,
-                    GenderId = student.GenderId
+                    GenderId = student.GenderId,
+                    Gender = new Gender()
+                    {
+                        Id = student.Gender.Id,
+                        Description = student.Gender.Description
+                    },
+                    Address = new Address()
+                    {
+                        Id = student.Address.Id,
+                        PhysicalAddress = student.Address.PhysicalAddress,
+                        PostalAddress = student.Address.PostalAddress
+                    }
                 });
             }
 
