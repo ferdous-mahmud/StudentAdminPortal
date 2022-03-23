@@ -8,45 +8,38 @@ import { StudentService } from './student.service';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css'],
+  styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
   students: Student[] = [];
-  displayedColumns: string[] = [
-    'firstName',
-    'lastName',
-    'dateOfBirth',
-    'email',
-    'mobile',
-    'gender',
-    'edit',
-  ];
+  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'mobile', 'gender', 'edit'];
   dataSource: MatTableDataSource<Student> = new MatTableDataSource<Student>();
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
   filterString = '';
 
-  constructor(private studentService: StudentService) {}
+  constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
     // Fetch Students
-    this.studentService.getStudents().subscribe(
-      (successResponse) => {
-        this.students = successResponse;
-        this.dataSource = new MatTableDataSource<Student>(this.students);
+    this.studentService.getStudents()
+      .subscribe(
+        (successResponse) => {
+          this.students = successResponse;
+          this.dataSource = new MatTableDataSource<Student>(this.students);
 
-        if (this.matPaginator) {
-          this.dataSource.paginator = this.matPaginator;
-        }
+          if (this.matPaginator) {
+            this.dataSource.paginator = this.matPaginator;
+          }
 
-        if (this.matSort) {
-          this.dataSource.sort = this.matSort;
+          if (this.matSort) {
+            this.dataSource.sort = this.matSort;
+          }
+        },
+        (errorResponse) => {
+          console.log(errorResponse);
         }
-      },
-      (errorResponse) => {
-        console.log(errorResponse);
-      }
-    );
+      );
   }
 
   filterStudents() {

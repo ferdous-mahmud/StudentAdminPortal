@@ -4,14 +4,15 @@ import { Observable } from 'rxjs';
 import { Gender } from '../models/api-models/gender.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class GenderService {
-  private baseApiUrl = 'https://localhost:44359';
 
-  constructor(private httpClient: HttpClient) {}
+  private baseApiUrl = 'https://localhost:44389';
+
+  constructor(private httpClient: HttpClient) { }
 
   getGenderList(): Observable<Gender[]> {
-    return this.httpClient.get<Gender[]>(this.baseApiUrl + '/Genders');
+    return this.httpClient.get<Gender[]>(this.baseApiUrl + '/genders');
   }
 }
